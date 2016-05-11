@@ -1,6 +1,6 @@
-// @SOURCE:/Users/koutaroh.nishida/ViewConApp/conf/routes
-// @HASH:ea1ad91a56479cfbdb12da4e5368f3d97a6dca0c
-// @DATE:Mon May 09 15:49:01 JST 2016
+// @SOURCE:/Users/koutaroh.nishida/Forms/conf/routes
+// @HASH:2945e11a64b9f59a7ec23aad4df99eda942b183d
+// @DATE:Tue May 10 10:21:15 JST 2016
 
 
 import play.core._
@@ -29,17 +29,17 @@ lazy val defaultPrefix = { if(Routes.prefix.endsWith("/")) "" else "/" }
 
 
 // @LINE:6
-private[this] lazy val controllers_Application_index0 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("index/"),DynamicPart("msg", """[^/]+""",true),StaticPart("/"),DynamicPart("id", """[^/]+""",true))))
+private[this] lazy val controllers_Application_index0 = Route("GET", PathPattern(List(StaticPart(Routes.prefix))))
         
 
-// @LINE:9
-private[this] lazy val controllers_Assets_at1 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
+// @LINE:7
+private[this] lazy val controllers_Application_send1 = Route("POST", PathPattern(List(StaticPart(Routes.prefix))))
         
 
-// @LINE:11
-private[this] lazy val controllers_Application_redirect2 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("redirect"))))
+// @LINE:10
+private[this] lazy val controllers_Assets_at2 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
         
-def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """index/$msg<[^/]+>/$id<[^/]+>""","""controllers.Application.index(msg:String, id:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """redirect""","""controllers.Application.redirect()""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""POST""", prefix,"""controllers.Application.send()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]] 
 }}
@@ -49,24 +49,24 @@ def routes:PartialFunction[RequestHeader,Handler] = {
 
 // @LINE:6
 case controllers_Application_index0(params) => {
-   call(params.fromPath[String]("msg", None), params.fromPath[Int]("id", None)) { (msg, id) =>
-        invokeHandler(controllers.Application.index(msg, id), HandlerDef(this, "controllers.Application", "index", Seq(classOf[String], classOf[Int]),"GET", """ Home page""", Routes.prefix + """index/$msg<[^/]+>/$id<[^/]+>"""))
+   call { 
+        invokeHandler(controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Nil,"GET", """ Home page""", Routes.prefix + """"""))
    }
 }
         
 
-// @LINE:9
-case controllers_Assets_at1(params) => {
+// @LINE:7
+case controllers_Application_send1(params) => {
+   call { 
+        invokeHandler(controllers.Application.send(), HandlerDef(this, "controllers.Application", "send", Nil,"POST", """""", Routes.prefix + """"""))
+   }
+}
+        
+
+// @LINE:10
+case controllers_Assets_at2(params) => {
    call(Param[String]("path", Right("/public")), params.fromPath[String]("file", None)) { (path, file) =>
         invokeHandler(controllers.Assets.at(path, file), HandlerDef(this, "controllers.Assets", "at", Seq(classOf[String], classOf[String]),"GET", """ Map static resources from the /public folder to the /assets URL path""", Routes.prefix + """assets/$file<.+>"""))
-   }
-}
-        
-
-// @LINE:11
-case controllers_Application_redirect2(params) => {
-   call { 
-        invokeHandler(controllers.Application.redirect(), HandlerDef(this, "controllers.Application", "redirect", Nil,"GET", """""", Routes.prefix + """redirect"""))
    }
 }
         

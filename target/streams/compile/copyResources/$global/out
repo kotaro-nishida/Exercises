@@ -1,3 +1,3 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/Users/koutaroh.nishida/ViewConApp/conf/application.conf,/Users/koutaroh.nishida/ViewConApp/target/scala-2.10/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/koutaroh.nishida/ViewConApp/conf/routes,/Users/koutaroh.nishida/ViewConApp/target/scala-2.10/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(/Users/koutaroh.nishida/Forms/conf/application.conf,/Users/koutaroh.nishida/Forms/target/scala-2.10/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/koutaroh.nishida/Forms/conf/routes,/Users/koutaroh.nishida/Forms/target/scala-2.10/classes/routes)[0m

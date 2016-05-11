@@ -1,16 +1,21 @@
-@(message: String)
+@(name:String,pass:String,check:String,radio:String,select:String, area:String,date:String,num:String, inputData:Form[Application.InputData])
 
-<!DOCTYPE html>
+@main("Sample Froms") {
 
-<html>
-    <head>
-        <title>index only page</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
-    </head>
-    <body>
-      <h1>hello!</h1>
-      <p>@message</p>
-    </body>
-</html>
+	<h1>Hello, Form!</h1>
+
+	<p>これは、サンプルで作ったページです。</p>
+	<p>@name@pass@check@radio@select@area@date@num</p>
+	@helper.form(action = routes.Application.send) {
+	@(helper.inputText(inputData("name"),args = '_label -> "あたなの名前",'_help->"入力必須"))
+	@(helper.inputPassword(inputData("passward"),'_label -> "パスワード"))
+	@(helper.checkbox(inputData("check")))
+	@(helper.inputRadioGroup(inputData("radio"),options = Seq("windows"->"MS-Windows","mac"->"Mac OS X","linux"->"Linux")))
+	@(helper.select(inputData("select"),helper.options(("jp","日本"),("us","アメリカ"),("uk","イギリス")),'size -> "3"))
+	@(helper.textarea(inputData("area"),'cols->50))
+	@(helper.inputDate(inputData("date"),'placeholder->"1999-01-11"))
+	@(helper.inputText(inputData("num"),args = '_label->"inputNum",'type->"number",'size->10,'min->10,'max->100))
+	<input type = "submit">
+	}
+
+}

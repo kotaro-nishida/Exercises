@@ -1,4 +1,4 @@
-name := "ViewConApp"
+name := "Forms"
 
 version := "1.0-SNAPSHOT"
 
