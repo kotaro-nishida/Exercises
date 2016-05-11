@@ -11,6 +11,7 @@ public class Application extends Controller {
 		return ok(index.render("引数は、" + msg + "," + id + "です。"));
     }
 
+
 	public static Result redirect(){
 		String msg = "";
 		int i = 0;
